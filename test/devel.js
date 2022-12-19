@@ -1,5 +1,5 @@
 'use strict'
-const test = require('tap').test
+import { test } from 'tap'
 const TOMLParser = require('../lib/toml-parser').makeParserClass(require('../lib/parser-debug.js'))
 
 let testtoml = `a = [[1.0], [1], [{}], ['abc']]\n[[b]]\n[c]\n`

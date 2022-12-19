@@ -24,27 +24,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const assertIsDeeply = require('./assert-is-deeply.js')
-const fs = require('fs')
-const path = require('path')
-const glob = require('glob').sync
+import assertIsDeeply from './assert-is-deeply.js'
+import { readFileSync, writeFileSync } from 'fs'
+import { basename } from 'path'
+import { sync as glob } from 'glob'
 const cursor = require('ansi')(process.stdout)
-const Benchmark = require('benchmark')
-const parseIarnaToml = require('./parse-string.js')
-const parseToml = require('toml').parse
-const parseTomlj04 = require('toml-j0.4').parse
-const bombadil = require('@sgarciac/bombadil')
+import { Suite } from 'benchmark'
+import parseIarnaToml from './parse-string.js'
+import { parse as parseToml } from 'toml'
+import { parse as parseTomlj04 } from 'toml-j0.4'
+import { TomlReader } from '@sgarciac/bombadil'
 function parseBombadil (str) {
-  const reader = new bombadil.TomlReader()
+  const reader = new TomlReader()
   reader.readToml(str)
   if (reader.result === null) throw reader.errors
   return reader.result
 }
-const ltdToml = require('@ltd/j-toml')
+import { parse as _parse } from '@ltd/j-toml'
 function parseLtdToml (str) {
-  return ltdToml.parse(str, 0.5, '\n')
+  return _parse(str, 0.5, '\n')
 }
-const parseFastToml = require('fast-toml').parse
+import { parse as parseFastToml } from 'fast-toml'
 
 const tests = {
   '@iarna/toml': parseIarnaToml,
@@ -58,20 +58,20 @@ const tests = {
 let results
 
 try {
-  results = JSON.parse(fs.readFileSync('./benchmark-results.json'))
+  results = JSON.parse(readFileSync('./benchmark-results.json'))
 } catch (_) {
   results = {}
 }
 
 const fixtures = glob(`${__dirname}/benchmark/*.toml`)
 /* eslint-disable security/detect-non-literal-fs-filename */
-  .map(_ => ({name: _, data: fs.readFileSync(_, {encoding: 'utf8'})}))
+  .map(_ => ({name: _, data: readFileSync(_, {encoding: 'utf8'})}))
 /* eslint-enable security/detect-non-literal-fs-filename */
 fixtures.forEach(_ => { _.answer = parseIarnaToml(_.data) })
 
 fixtures.forEach(fixture => {
-  const name = path.basename(fixture.name, '.toml')
-  const suite = new Benchmark.Suite({
+  const name = basename(fixture.name, '.toml')
+  const suite = new Suite({
     onStart: function () {
       console.log(`${name} Benchmarking...`)
     },
@@ -94,7 +94,7 @@ fixtures.forEach(fixture => {
           }
         }
       })
-      fs.writeFileSync('benchmark-results.json', JSON.stringify(results, null, 2))
+      writeFileSync('benchmark-results.json', JSON.stringify(results, null, 2))
     },
     onError: function (event) {
       console.error(event.target.error)

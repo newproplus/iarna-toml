@@ -1,5 +1,5 @@
 'use strict'
-module.exports = prettyError
+export default prettyError
 
 function prettyError (err, buf) {
   /* istanbul ignore if */

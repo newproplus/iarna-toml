@@ -1,5 +1,10 @@
 'use strict'
-module.exports = require('./parse-string.js')
-module.exports.async = require('./parse-async.js')
-module.exports.stream = require('./parse-stream.js')
-module.exports.prettyError = require('./parse-pretty-error.js')
+export { default } from "./parse-string.js"
+
+import parseAsync_  from './parse-async.js'
+import parseStream_  from './parse-stream.js'
+import prettyError_  from './parse-pretty-error.js'
+
+export const async = parseAsync_
+export const stream = parseStream_
+export const prettyError = prettyError_

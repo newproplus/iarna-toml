@@ -1,7 +1,7 @@
 'use strict'
-const TOML = require('..')
-const util = require('util')
-const dump = d => util.inspect(d, {colors: true, depth: Infinity})
+import { parse } from '..'
+import { inspect } from 'util'
+const dump = d => inspect(d, {colors: true, depth: Infinity})
 
 success()
 failure()
@@ -11,7 +11,7 @@ function success () {
 
   console.log('Parsing:', testtoml)
   try {
-    console.log('Result:', dump(TOML.parse(testtoml)))
+    console.log('Result:', dump(parse(testtoml)))
   } catch (err) {
     console.error('Error:', err.message)
   }
@@ -22,7 +22,7 @@ function failure () {
 
   console.log('Parsing:', testtoml)
   try {
-    console.log('Result:', dump(TOML.parse(testtoml)))
+    console.log('Result:', dump(parse(testtoml)))
   } catch (err) {
     console.error('Error:', err.message)
   }

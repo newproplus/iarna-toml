@@ -1,6 +1,6 @@
 'use strict'
-const test = require('tap').test
-const TOML = require('..')
+import { test } from 'tap'
+import { stringify, parse } from '..'
 
 const roundtrip = {
   'toJSON is not a function': {obj: {a: {toJSON: 'EXAMPLE'}}, toml: `[a]\ntoJSON = "EXAMPLE"\n`},
@@ -40,7 +40,7 @@ const bad = {
 test('stringify', t => {
   Object.keys(bad).forEach(msg => {
     try {
-      const result = TOML.stringify(bad[msg])
+      const result = stringify(bad[msg])
       t.comment(result)
       t.fail(msg)
     } catch (err) {
@@ -50,7 +50,7 @@ test('stringify', t => {
   })
   Object.keys(good).forEach(msg => {
     try {
-      const result = TOML.stringify(good[msg].obj)
+      const result = stringify(good[msg].obj)
       t.is(result, good[msg].toml, msg)
     } catch (err) {
       t.comment(err.message)
@@ -59,9 +59,9 @@ test('stringify', t => {
   })
   Object.keys(roundtrip).forEach(msg => {
     try {
-      const result = TOML.stringify(roundtrip[msg].obj)
+      const result = stringify(roundtrip[msg].obj)
       t.is(result, roundtrip[msg].toml, msg)
-      t.isDeeply(TOML.parse(result), roundtrip[msg].obj, msg + ' roundtrip')
+      t.isDeeply(parse(result), roundtrip[msg].obj, msg + ' roundtrip')
     } catch (err) {
       t.comment(err.message)
       t.fail(msg)

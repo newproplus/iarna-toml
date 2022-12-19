@@ -1,8 +1,8 @@
 'use strict'
-const Readable = require('stream').Readable
-const TOML = require('..')
-const util = require('util')
-const dump = d => util.inspect(d, {colors: true, depth: Infinity})
+import { Readable } from 'stream'
+import { parse } from '..'
+import { inspect } from 'util'
+const dump = d => inspect(d, {colors: true, depth: Infinity})
 
 success().then(() => failure())
 
@@ -24,7 +24,7 @@ function success () {
     let testtoml = `a = [1.0,1e0]`
 
     console.log('Parsing:', testtoml)
-    streamString(testtoml).pipe(TOML.parse.stream())
+    streamString(testtoml).pipe(parse.stream())
       .on('data', o => console.log('Result', dump(o)))
       .on('end', resolve)
       .on('error', _ => {
@@ -39,7 +39,7 @@ function failure () {
     let testtoml = `a = [1.0,1e0`
 
     console.log('Parsing:', testtoml)
-    streamString(testtoml).pipe(TOML.parse.stream())
+    streamString(testtoml).pipe(parse.stream())
       .on('data', o => console.log('Result', dump(o)))
       .on('end', resolve)
       .on('error', _ => {

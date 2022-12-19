@@ -1,8 +1,8 @@
 'use strict'
 const TOMLParser = require('../lib/toml-parser').makeParserClass(require('../lib/parser-debug.js'))
-const prettyError = require('../parse-pretty-error')
-const util = require('util')
-const dump = d => util.inspect(d, {colors: true, depth: Infinity})
+import prettyError from '../parse-pretty-error'
+import { inspect } from 'util'
+const dump = d => inspect(d, {colors: true, depth: Infinity})
 
 success()
 failure()

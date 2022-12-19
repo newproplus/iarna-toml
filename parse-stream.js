@@ -1,8 +1,8 @@
 'use strict'
-module.exports = parseStream
+export default parseStream
 
-const stream = require('stream')
-const TOMLParser = require('./lib/toml-parser.js')
+import { Transform } from 'stream'
+import TOMLParser from './lib/toml-parser.js'
 
 function parseStream (stm) {
   if (stm) {
@@ -58,7 +58,7 @@ function parseReadable (stm) {
 
 function parseTransform () {
   const parser = new TOMLParser()
-  return new stream.Transform({
+  return new Transform({
     objectMode: true,
     transform (chunk, encoding, cb) {
       try {

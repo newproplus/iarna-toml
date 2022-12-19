@@ -11,9 +11,9 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-var test = require('tap').test
-var TOML = require('../..')
-var toTOMLString = require('./to-toml-string.js')
+import { test } from 'tap'
+import { parse } from '../..'
+import toTOMLString from './to-toml-string.js'
 
 test('composite objects to TOML', function (t) {
   t.test('with a very basic nested object', function (t) {
@@ -24,7 +24,7 @@ test('composite objects to TOML', function (t) {
 
       if (!er) {
         t.equals(output, '[object]\nvalue = true\n')
-        t.same(TOML.parse(output), input, 'round trip test worked')
+        t.same(parse(output), input, 'round trip test worked')
       }
       t.end()
     })
@@ -67,7 +67,7 @@ test('composite objects to TOML', function (t) {
 
       if (!er) {
         t.equals(output, expected)
-        t.same(TOML.parse(output), input, 'round trip test worked')
+        t.same(parse(output), input, 'round trip test worked')
       }
       t.end()
     })
@@ -83,7 +83,7 @@ test('composite objects to TOML', function (t) {
 
       if (!er) {
         t.equals(output, expected)
-        t.same(TOML.parse(output), input, 'round trip test worked')
+        t.same(parse(output), input, 'round trip test worked')
       }
       t.end()
     })
@@ -118,7 +118,7 @@ test('composite objects to TOML', function (t) {
 
       if (!er) {
         t.equals(output, expected)
-        t.same(TOML.parse(output), input, 'round trip test worked')
+        t.same(parse(output), input, 'round trip test worked')
       }
       t.end()
     })

@@ -1,10 +1,22 @@
-# @iarna/toml
+# iarna_toml_ESM
+
+> This is an ESM version of [@iarna/toml](https://github.com/iarna/iarna-toml).
+>
+> It works well with vite, etc.
+>
+> Usage:
+> 
+> ```js
+> import { stringify, parse } from '@/packages/iarna-toml'
+> ```
+>
+> The fllowing content is the orgin version from @iarna/toml.
 
 Better TOML parsing and stringifying all in that familiar JSON interface.
 
 [![Coverage Status](https://coveralls.io/repos/github/iarna/iarna-toml/badge.svg)](https://coveralls.io/github/iarna/iarna-toml)
 
-# ** TOML 1.0.0-rc.1 **
+## ** TOML 1.0.0-rc.1 **
 
 ### TOML Spec Support
 
@@ -250,7 +262,7 @@ The test suite is maintained at 100% coverage: [![Coverage Status](https://cover
 The spec was carefully hand converted into a series of test framework
 independent (and mostly language independent) assertions, as pairs of TOML
 and YAML files.  You can find those files here:
-[spec-tests](https://github.com/iarna/toml-spec-tests/). 
+[spec-test](https://github.com/iarna/toml-spec-test/). 
 
 Further tests were written to increase coverage to 100%, these may be more
 implementation specific, but they can be found in [coverage](https://github.com/iarna/iarna-toml/blob/latest/test/coverage.js) and

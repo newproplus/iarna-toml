@@ -1,13 +1,13 @@
 'use strict'
-const tap = require('tap')
-module.exports = tap
+import tap, { deeplyObjectIs, Test, comment } from 'tap'
+export default tap
 
-const isDeeply = require('./is-deeply.js')
+import isDeeply from './is-deeply.js'
 
-if (!tap.deeplyObjectIs) {
-  tap.Test.prototype.addAssert('deeplyObjectIs', 2, function (found, wanted, message, extra) {
+if (!deeplyObjectIs) {
+  Test.prototype.addAssert('deeplyObjectIs', 2, function (found, wanted, message, extra) {
     const equiv = isDeeply(found, wanted)
-    if (!equiv) tap.comment(found, wanted)
+    if (!equiv) comment(found, wanted)
     return this.ok(equiv, message, extra)
   })
 }

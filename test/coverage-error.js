@@ -1,7 +1,7 @@
 'use strict'
-const test = require('tap').test
-const TOML = require('../toml.js')
-const TomlError = require('../lib/toml-parser.js').TomlError
+import { test } from 'tap'
+import { parse } from '../toml.js'
+import { TomlError } from '../lib/toml-parser.js'
 
 const errors = {
   'text after table name': "[error]   if you didn't catch this, your parser is broken",
@@ -74,7 +74,7 @@ const errors = {
 test('should be errors', t => {
   Object.keys(errors).forEach(msg => {
     try {
-      t.comment(TOML.parse(errors[msg]))
+      t.comment(parse(errors[msg]))
       t.fail(msg)
     } catch (err) {
       t.comment(err.message)

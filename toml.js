@@ -1,3 +1,3 @@
 'use strict'
-exports.parse = require('./parse.js')
-exports.stringify = require('./stringify.js')
+export const parse = require('./parse.js')
+export const stringify = require('./stringify.js')

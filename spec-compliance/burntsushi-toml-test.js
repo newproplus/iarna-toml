@@ -1,23 +1,23 @@
 'use strict'
-const TomlError = require('../lib/toml-parser.js').TomlError
-const testParser = require('../test/lib/test-parser.js')
+import { TomlError } from '../lib/toml-parser.js'
+import testParser from '../test/lib/test-parser.js'
 
-const iarnaToml = require('../parse-string.js')
-const iarnaTomlVersion = require('../package.json').version
-const TomlSyntaxError = require('toml').SyntaxError
-const parseToml = require('toml').parse
-const tomlVersion = require('toml/package.json').version
-const Tomlj04SyntaxError = require('toml-j0.4').SyntaxError
-const parseTomlj04 = require('toml-j0.4').parse
-const tomlj04Version = require('toml-j0.4/package.json').version
-const bombadil = require('@sgarciac/bombadil')
-const bombadilVersion = require('@sgarciac/bombadil/package.json').version
-const ltdToml = require('@ltd/j-toml')
-const ltdTomlVersion = require('@ltd/j-toml/package.json').version
-const parseFastToml = require('fast-toml').parse
-const fastTomlVersion = require('fast-toml/package.json').version
+import iarnaToml from '../parse-string.js'
+import { version as iarnaTomlVersion } from '../package.json'
+import { SyntaxError as TomlSyntaxError } from 'toml'
+import { parse as parseToml } from 'toml'
+import { version as tomlVersion } from 'toml/package.json'
+import { SyntaxError as Tomlj04SyntaxError } from 'toml-j0.4'
+import { parse as parseTomlj04 } from 'toml-j0.4'
+import { version as tomlj04Version } from 'toml-j0.4/package.json'
+import { TomlReader } from '@sgarciac/bombadil'
+import { version as bombadilVersion } from '@sgarciac/bombadil/package.json'
+import { parse as _parse } from '@ltd/j-toml'
+import { version as ltdTomlVersion } from '@ltd/j-toml/package.json'
+import { parse as parseFastToml } from 'fast-toml'
+import { version as fastTomlVersion } from 'fast-toml/package.json'
 function parseLtdToml (str) {
-  return ltdToml.parse(str, 0.5, '\n', Number.MAX_SAFE_INTEGER)
+  return _parse(str, 0.5, '\n', Number.MAX_SAFE_INTEGER)
 }
 
 class BombadilError extends Error {
@@ -48,7 +48,7 @@ const toTest = [
     ErrorClass: BombadilError,
     parse: str => {
       // this is assuming that readToml should never throw
-      const reader = new bombadil.TomlReader()
+      const reader = new TomlReader()
       reader.readToml(str)
       if (reader.result == null) throw new BombadilError(reader.errors)
       return reader.result

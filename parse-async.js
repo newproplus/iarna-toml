@@ -1,8 +1,8 @@
 'use strict'
-module.exports = parseAsync
+export default parseAsync
 
-const TOMLParser = require('./lib/toml-parser.js')
-const prettyError = require('./parse-pretty-error.js')
+import TOMLParser from './lib/toml-parser.js'
+import prettyError from './parse-pretty-error.js'
 
 function parseAsync (str, opts) {
   if (!opts) opts = {}

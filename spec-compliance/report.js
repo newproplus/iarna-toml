@@ -1,4 +1,4 @@
-const qx = require('@perl/qx').sync
+import { sync as qx } from '@perl/qx'
 const result = JSON.parse(qx`node ${__dirname}/run-tests.js`)
 const testNames = Object.keys(result)
 const parsers = Object.keys(result[testNames[0]])

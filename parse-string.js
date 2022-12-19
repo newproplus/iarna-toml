@@ -1,8 +1,9 @@
 'use strict'
-module.exports = parseString
+export default parseString
 
-const TOMLParser = require('./lib/toml-parser.js')
-const prettyError = require('./parse-pretty-error.js')
+import './polyfills_x.js'
+import TOMLParser from './lib/toml-parser.js'
+import prettyError from './parse-pretty-error.js'
 
 function parseString (str) {
   if (global.Buffer && global.Buffer.isBuffer(str)) {

@@ -1,6 +1,6 @@
 'use strict'
-const test = require('tap').test
-const TOML = require('../toml.js')
+import { test } from 'tap'
+import { parse, stringify } from '../toml.js'
 
 const tests = {
   stringEmpty: {toml: `key = ""`, data: {key: ''}},
@@ -46,10 +46,10 @@ const tests = {
 test('spec', t => {
   Object.keys(tests).forEach(name => {
     t.doesNotThrow(() => {
-      t.isDeeply(TOML.parse(tests[name].toml), tests[name].data, name + ' parsed correctly')
+      t.isDeeply(parse(tests[name].toml), tests[name].data, name + ' parsed correctly')
     }, name + 'parse did not throw')
     t.doesNotThrow(() => {
-      t.isDeeply(TOML.parse(TOML.stringify(tests[name].data)), tests[name].data, name + ' roundtrip')
+      t.isDeeply(parse(stringify(tests[name].data)), tests[name].data, name + ' roundtrip')
     }, name + ' roundtrip did not throw')
   })
   t.end()

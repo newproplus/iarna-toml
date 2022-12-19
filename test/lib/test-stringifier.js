@@ -1,11 +1,11 @@
 'use strict'
-module.exports = runTests
+export default runTests
 
-const path = require('path')
-const t = require('./tap-is-deeply.js')
-const glob = require('glob').sync
-const TOML = require('../..')
-const getExpected = require('./get-expected.js')
+import { basename } from 'path'
+import { test } from './tap-is-deeply.js'
+import { sync as glob } from 'glob'
+import { parse } from '../..'
+import getExpected from './get-expected.js'
 
 function runTests (parsers, valid, skip) {
   /* eslint-disable security/detect-non-literal-regexp */
@@ -14,14 +14,14 @@ function runTests (parsers, valid, skip) {
     .filter(_ => !skipre || !skipre.test(_))
 
   parsers.forEach(parser => {
-    t.test(parser.name, t => {
+    test(parser.name, t => {
       t.test('stringify-asserts', t => {
         t.plan(tests.length)
         for (let spec of tests) {
           const expected = getExpected(spec)
-          const name = path.basename(spec, '.toml')
+          const name = basename(spec, '.toml')
           try {
-            t.deeplyObjectIs(TOML.parse(parser.stringify(expected)), expected, name)
+            t.deeplyObjectIs(parse(parser.stringify(expected)), expected, name)
           } catch (err) {
             t.error(err, name)
           }

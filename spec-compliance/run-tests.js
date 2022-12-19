@@ -1,4 +1,4 @@
-const qx = require('@perl/qx').sync
+import { sync as qx } from '@perl/qx'
 const data = JSON.parse(qx`npx tap ${__dirname}/local-spec-test.js -R json`)
 
 const labels = {

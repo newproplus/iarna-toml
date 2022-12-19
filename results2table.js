@@ -1,7 +1,7 @@
 'use strict'
-const approx = require('approximate-number')
-const fs = require('fs')
-const results = JSON.parse(fs.readFileSync('./benchmark-results.json'))
+import approx from 'approximate-number'
+import { readFileSync } from 'fs'
+const results = JSON.parse(readFileSync('./benchmark-results.json'))
 
 const size = {
   'overall': 1124628
@@ -37,9 +37,9 @@ const testName = {
 function fileSize (name) {
   /* eslint-disable security/detect-non-literal-fs-filename */
   try {
-    return fs.readFileSync('benchmark/' + name + '.toml').length
+    return readFileSync('benchmark/' + name + '.toml').length
   } catch (_) {
-    return fs.readFileSync('test/spec-test/' + name + '.toml').length
+    return readFileSync('test/spec-test/' + name + '.toml').length
   }
 }
 

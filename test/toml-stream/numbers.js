@@ -11,16 +11,16 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-var test = require('tap').test
-var TOML = require('../..')
-var stringify = require('../../stringify.js')
+import { test } from 'tap'
+import { parse } from '../..'
+import stringify from '../../stringify.js'
 
 test('integer TOML values', function (t) {
   t.test('with one value', function (t) {
     var input = {number: 314}
     var output = stringify(input)
     t.equals(output, 'number = 314\n', 'got expected output')
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -33,7 +33,7 @@ test('integer TOML values', function (t) {
       'number1 = 314\nnumber2 = 415\nnumber3 = 303\nnumber4 = 808\n',
       'got expected output'
     )
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -46,7 +46,7 @@ test('long integer TOML values', function (t) {
 
     var output = stringify(input)
     t.equals(output, 'number = 3_140\n', 'got expected output')
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -58,7 +58,7 @@ test('long integer TOML values', function (t) {
       'number1 = 3_140\nnumber2 = 41_500\nnumber3 = 303_000\nnumber4 = 8_080_000\n',
       'got expected output'
     )
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -70,7 +70,7 @@ test('floating-point TOML values', function (t) {
     var input = {number: 3.14}
     var output = stringify(input)
     t.equals(output, 'number = 3.14\n', 'got expected output')
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -82,7 +82,7 @@ test('floating-point TOML values', function (t) {
       'number1 = 3.14\nnumber2 = 4.15\nnumber3 = 30.3\nnumber4 = 0.808\n',
       'got expected output'
     )
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -94,7 +94,7 @@ test('long floating-point TOML values', function (t) {
     var input = {number: 3140.12345}
     var output = stringify(input)
     t.equals(output, 'number = 3_140.12345\n', 'got expected output')
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 
@@ -114,7 +114,7 @@ test('long floating-point TOML values', function (t) {
         'number4 = 8_080_000.1\n',
       'got expected output'
     )
-    t.same(TOML.parse(output), input, 'round trip test worked')
+    t.same(parse(output), input, 'round trip test worked')
     t.end()
   })
 

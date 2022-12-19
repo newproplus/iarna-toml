@@ -1,5 +1,5 @@
 'use strict'
-module.exports = isDeeply
+export default isDeeply
 
 function kindOf (aa) {
   const aaType = typeof aa

@@ -1,6 +1,6 @@
 'use strict'
-const test = require('tap').test
-const parsePrettyError = require('../parse-pretty-error.js')
+import { test } from 'tap'
+import parsePrettyError from '../parse-pretty-error.js'
 
 test('parse-pretty-error', t => {
   const buf = []

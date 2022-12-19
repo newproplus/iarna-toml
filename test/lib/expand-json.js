@@ -1,9 +1,10 @@
 'use strict'
-module.exports = expand
-const createDatetime = require('../../lib/create-datetime.js')
-const createDatetimeFloat = require('../../lib/create-datetime-float.js')
-const createDate = require('../../lib/create-date.js')
-const createTime = require('../../lib/create-time.js')
+export default expand
+import '../../polyfills_x.js'
+import createDatetime from '../../lib/create-datetime.js'
+import createDatetimeFloat from '../../lib/create-datetime-float.js'
+import createDate from '../../lib/create-date.js'
+import createTime from '../../lib/create-time.js'
 
 function expand (obj) {
   const result = {}

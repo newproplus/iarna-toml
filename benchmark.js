@@ -24,50 +24,67 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
 
-const assertIsDeeply = require('./assert-is-deeply.js')
-const fs = require('fs')
-const glob = require('glob').sync
-const cursor = require('ansi')(process.stdout)
-const Benchmark = require('benchmark')
-const parseIarnaToml = require('./parse-string.js')
-const parseToml = require('toml').parse
-const parseTomlj04 = require('toml-j0.4').parse
-const bombadil = require('@sgarciac/bombadil')
-function parseBombadil (str) {
-  const reader = new bombadil.TomlReader()
+import path from 'path';
+import {fileURLToPath} from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+import assertIsDeeply from './assert-is-deeply.js'
+import { readFileSync, writeFileSync } from 'fs'
+// import { sync as glob } from 'glob'
+import pkg_glob from 'glob';
+const { sync: glob } = pkg_glob;
+// const cursor = require('ansi')(process.stdout)
+import ansi from 'ansi'
+const cursor = ansi.Cursor
+// const cursor = ansi.process.stdout
+import pkg_benchmark from 'benchmark'
+const { Suite } = pkg_benchmark;
+import parseIarnaToml from './parse-string.js'
+import { parse as parseToml } from 'toml'
+// import { parse as parseTomlj04 } from 'toml-j0.4'
+import pkg_toml_j from 'toml-j0.4';
+const { parse: parseTomlj04 } = pkg_toml_j;
+import { TomlReader } from '@sgarciac/bombadil'
+function parseBombadil(str) {
+  const reader = new TomlReader()
   reader.readToml(str)
   if (reader.result === null) throw reader.errors
   return reader.result
 }
-const ltdToml = require('@ltd/j-toml')
-function parseLtdToml (str) {
-  return ltdToml.parse(str, 0.5, '\n')
+// import { parse as _parse } from '@ltd/j-toml'
+import pkg_j_toml from '@ltd/j-toml';
+const { parse: _parse } = pkg_j_toml;
+function parseLtdToml(str) {
+  return _parse(str, 0.5, '\n')
 }
-const parseFastToml = require('fast-toml').parse
+// import { parse as parseFastToml } from 'fast-toml'
+import pkg_fast_toml from 'fast-toml';
+const { parse: parseFastToml } = pkg_fast_toml;
 const fixtures = glob(`${__dirname}/benchmark/*.toml`)
   .concat(glob(`${__dirname}/test/spec-test/*toml`))
-/* eslint-disable security/detect-non-literal-fs-filename */
-  .map(_ => ({name: _, data: fs.readFileSync(_, {encoding: 'utf8'})}))
+  /* eslint-disable security/detect-non-literal-fs-filename */
+  .map(_ => ({ name: _, data: readFileSync(_, { encoding: 'utf8' }) }))
 /* eslint-enable security/detect-non-literal-fs-filename */
 fixtures.forEach(_ => { _.answer = parseIarnaToml(_.data) })
 var results
 
 console.error(fixtures.reduce((acc, _) => acc + _.data.length, 0))
 try {
-  results = JSON.parse(fs.readFileSync('./benchmark-results.json'))
+  results = JSON.parse(readFileSync('./benchmark-results.json'))
 } catch (_) {
   results = {}
 }
 
-const suite = new Benchmark.Suite({
+const suite = new Suite({
   onStart: function () {
     console.log('Overall Benchmarking...')
   },
   onComplete: function () {
     console.log('Overall Successful:\n\t' +
-        this.filter('successful').map('name').join(', '))
+      this.filter('successful').map('name').join(', '))
     console.log('Overall Fastest:\n\t' +
-        this.filter('fastest').map('name').join(', '))
+      this.filter('fastest').map('name').join(', '))
     if (!results[process.version]) results[process.version] = {}
     const data = results[process.version].overall = {}
     this.forEach(_ => {
@@ -82,7 +99,7 @@ const suite = new Benchmark.Suite({
         }
       }
     })
-    fs.writeFileSync('benchmark-results.json', JSON.stringify(results, null, 2))
+    writeFileSync('benchmark-results.json', JSON.stringify(results, null, 2))
   },
   onError: function (event) {
     console.error(event.target.error)
@@ -115,7 +132,7 @@ Object.keys(tests).forEach(name => {
       maxTime: 15,
       onCycle,
       onComplete,
-      fn () {
+      fn() {
         fixtures.forEach(_ => {
           parse(_.data)
         })
@@ -126,7 +143,7 @@ Object.keys(tests).forEach(name => {
       maxTime: 15,
       onCycle,
       onComplete,
-      fn () {
+      fn() {
         /* eslint-disable no-throw-literal */
         throw 'skipping: crashed or did not produce valid results'
       }

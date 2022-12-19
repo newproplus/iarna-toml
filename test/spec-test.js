@@ -1,13 +1,13 @@
 'use strict'
-const TOML = require('..')
-const TomlError = require('../lib/toml-parser.js').TomlError
-const testParser = require('./lib/test-parser.js')
-const testStringifier = require('./lib/test-stringifier.js')
+import { parse as _parse, stringify as _stringify } from '..'
+import { TomlError } from '../lib/toml-parser.js'
+import testParser from './lib/test-parser.js'
+import testStringifier from './lib/test-stringifier.js'
 
 const toTest = {
   name: '@iarna/toml',
-  parse: TOML.parse,
-  stringify: TOML.stringify,
+  parse: _parse,
+  stringify: _stringify,
   ErrorClass: TomlError
 }
 
