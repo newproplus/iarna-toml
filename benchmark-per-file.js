@@ -28,11 +28,17 @@ import assertIsDeeply from './assert-is-deeply.js'
 import { readFileSync, writeFileSync } from 'fs'
 import { basename } from 'path'
 import { sync as glob } from 'glob'
-const cursor = require('ansi')(process.stdout)
-import { Suite } from 'benchmark'
+// const cursor = require('ansi')(process.stdout)
+import ansi from 'ansi'
+const cursor = ansi.Cursor
+// import { Suite } from 'benchmark'
+import pkg_benchmark from 'benchmark'
+const { Suite } = pkg_benchmark;
 import parseIarnaToml from './parse-string.js'
 import { parse as parseToml } from 'toml'
-import { parse as parseTomlj04 } from 'toml-j0.4'
+// import { parse as parseTomlj04 } from 'toml-j0.4'
+import pkg_toml_j from 'toml-j0.4';
+const { parse: parseTomlj04 } = pkg_toml_j;
 import { TomlReader } from '@sgarciac/bombadil'
 function parseBombadil (str) {
   const reader = new TomlReader()
@@ -44,7 +50,9 @@ import { parse as _parse } from '@ltd/j-toml'
 function parseLtdToml (str) {
   return _parse(str, 0.5, '\n')
 }
-import { parse as parseFastToml } from 'fast-toml'
+// import { parse as parseFastToml } from 'fast-toml'
+import pkg_fast_toml from 'fast-toml';
+const { parse: parseFastToml } = pkg_fast_toml;
 
 const tests = {
   '@iarna/toml': parseIarnaToml,

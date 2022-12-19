@@ -38,9 +38,9 @@
     "encoder",
     "decoder"
   ],
-  "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
+  "author": "https://github.com/newproplus",
   "license": "ISC",
-  "description": "Better TOML parsing and stringifying all in that familiar JSON interface.",
+  "description": "ESM version of @iarna/toml. Better TOML parsing and stringifying all in that familiar JSON interface.",
   "dependencies": {
     "@types/iarna__toml": "^2.0.2",
     "stream": "^0.0.2"
@@ -88,10 +88,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/iarna/iarna-toml.git"
+    "url": "git+https://github.com/newproplus/iarna-toml.git"
   },
   "bugs": {
-    "url": "https://github.com/iarna/iarna-toml/issues"
+    "url": "https://github.com/newproplus/iarna-toml/issues"
   },
-  "homepage": "https://github.com/iarna/iarna-toml#readme"
+  "homepage": "https://github.com/newproplus/iarna-toml#readme"
 }
