@@ -1,2 +1,4 @@
-export {default as parse} from './parse.js'
-export {default as stringify} from './stringify.js'
+import TOML from './toml.js';
+export const parse = TOML.parse;
+export const stringify = TOML.stringify;
+export default TOML;

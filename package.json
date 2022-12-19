@@ -1,17 +1,17 @@
 {
-  "name": "@iarna/toml",
-  "version": "3.0.0",
-  "type": "module",
-  "main": "./toml.js",
+  "name": "iarna-toml-esm",
+  "version": "3.0.3",
+  "main": "./toml-esm.mjs",
   "exports": {
-    ".": [
-      {
-        "require": "./toml.js",
-        "import": "./toml-esm.mjs"
-      },
-      "./toml.js"
-    ],
-    "./esm": "./toml-esm.mjs"
+    ".": {
+      "node": {
+        "import": "./toml-esm.mjs",
+        "require": "./toml.js"
+      }
+    },
+    "./esm": {
+      "node": "./toml-esm.mjs"
+    }
   },
   "scripts": {
     "test": "tap -J --100 test/*.js test/toml-stream/*.js",
@@ -40,7 +40,7 @@
   ],
   "author": "https://github.com/newproplus",
   "license": "ISC",
-  "description": "ESM version of @iarna/toml. Better TOML parsing and stringifying all in that familiar JSON interface.",
+  "description": "ESM version of @iarna/toml v3.0.0. Better TOML parsing and stringifying all in that familiar JSON interface.",
   "dependencies": {
     "@types/iarna__toml": "^2.0.2",
     "stream": "^0.0.2"
@@ -80,7 +80,7 @@
     "lib/create-date.js",
     "lib/create-datetime-float.js",
     "lib/create-time.js",
-    "lib/format-num.js",    
+    "lib/format-num.js",
     "index.d.ts"
   ],
   "directories": {

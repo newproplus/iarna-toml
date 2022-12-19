@@ -7,7 +7,7 @@
 > Usage:
 > 
 > ```js
-> import { stringify, parse } from '@/packages/iarna-toml'
+> import { stringify, parse } from 'iarna-toml-esm'
 > ```
 >
 > The fllowing content is the orgin version from @iarna/toml.
