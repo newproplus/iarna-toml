@@ -1,17 +1,14 @@
 {
   "name": "iarna-toml-esm",
-  "version": "3.0.3",
-  "main": "./toml-esm.mjs",
+  "version": "3.0.6",
+  "type": "commonjs",
+  "main": "./toml.cjs",
   "exports": {
     ".": {
-      "node": {
-        "import": "./toml-esm.mjs",
-        "require": "./toml.js"
-      }
+      "import": "./toml-esm.mjs",
+      "require": "./toml.cjs"
     },
-    "./esm": {
-      "node": "./toml-esm.mjs"
-    }
+    "./esm": "./toml-esm.mjs"
   },
   "scripts": {
     "test": "tap -J --100 test/*.js test/toml-stream/*.js",
@@ -42,7 +39,6 @@
   "license": "ISC",
   "description": "ESM version of @iarna/toml v3.0.0. Better TOML parsing and stringifying all in that familiar JSON interface.",
   "dependencies": {
-    "@types/iarna__toml": "^2.0.2",
     "stream": "^0.0.2"
   },
   "devDependencies": {
@@ -65,7 +61,8 @@
     "weallcontribute": "*"
   },
   "files": [
-    "toml.js",
+    "toml.cjs",
+    "toml-esm.mjs",
     "stringify.js",
     "parse.js",
     "parse-string.js",

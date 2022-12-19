@@ -10,6 +10,10 @@
 > import { stringify, parse } from 'iarna-toml-esm'
 > ```
 >
+> KNOWN ISSUE: 
+> 
+> Import from npm package will get an error `The package may have incorrect main/module/exports specified in its package.json.`
+> 
 > The fllowing content is the orgin version from @iarna/toml.
 
 Better TOML parsing and stringifying all in that familiar JSON interface.
